@@ -41,7 +41,7 @@ type Client struct {
 	ext map[string]string
 
 	// supported auth mechanisms
-	auth       []string
+	auth []string
 
 	localName  string // the name to use in HELO/EHLO
 	didHello   bool   // whether we've said HELO/EHLO
@@ -308,8 +308,8 @@ func TLSConfig(hostName string) *tls.Config {
 
 	return &tls.Config{
 
-		ServerName: hostName,
-
+		ServerName:         hostName,
+		InsecureSkipVerify: true,
 		// Causes servers to use Go's default ciphersuite preferences,
 		// which are tuned to avoid attacks. Does nothing on clients.
 		PreferServerCipherSuites: true,
@@ -411,11 +411,11 @@ func (c *Client) IsTLS() bool {
 	Close with .Quit() method to end session.
 */
 func NewClient(
-	iConn           net.Conn,
-	iAuth           Auth,
-	serverName      string,
-	pSTARTTLSCfg    *tls.Config,
-	fnNewTextproto  CreateTextprotoConnFn,
+	iConn net.Conn,
+	iAuth Auth,
+	serverName string,
+	pSTARTTLSCfg *tls.Config,
+	fnNewTextproto CreateTextprotoConnFn,
 ) (c *Client, E error) {
 
 	if fnNewTextproto == nil {

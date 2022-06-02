@@ -102,7 +102,7 @@ func (CFG SMTPClientConfig) SimpleSend(MSG ...*Email) (E error) {
 	}
 
 	var iConn net.Conn
-	var pTLSCfgClient *tls.Config = nil
+	pTLSCfgClient := &tls.Config{InsecureSkipVerify: true}
 
 	switch CFG.Mode {
 
