@@ -1,3 +1,5 @@
+# fork form [email.v2](https://github.com/BourgeoisBear/email.v2)
+
 # email.v2
 Yet another SMTP client!
 
